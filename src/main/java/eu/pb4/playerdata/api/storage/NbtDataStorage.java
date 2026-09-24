@@ -30,7 +30,7 @@ public record NbtDataStorage(String path) implements PlayerDataStorage<CompoundT
             NbtIo.writeCompressed(settings, path.resolve(this.path + ".dat"));
             return true;
         } catch (Exception e) {
-            PMI.LOGGER.error(String.format("Couldn't save player data of %s for path %s", player, this.path));
+            PMI.LOGGER.error("Couldn't save player data of {} for path {}", player, this.path);
             e.printStackTrace();
             return false;
         }
@@ -46,7 +46,7 @@ public record NbtDataStorage(String path) implements PlayerDataStorage<CompoundT
 
             return NbtIo.readCompressed(path, NbtAccounter.unlimitedHeap());
         } catch (Exception e) {
-            PMI.LOGGER.error(String.format("Couldn't load player data of %s for path %s", player, this.path));
+            PMI.LOGGER.error("Couldn't load player data of {} for path {}", player, this.path);
             e.printStackTrace();
             return null;
         }

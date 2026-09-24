@@ -6,14 +6,12 @@ import eu.pb4.playerdata.impl.BaseGson;
 import eu.pb4.playerdata.impl.PMI;
 import eu.pb4.playerdata.api.PlayerDataApi;
 import net.minecraft.server.MinecraftServer;
-import org.apache.commons.io.IOUtils;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.UUID;
-import java.util.function.Consumer;
 import java.util.function.Function;
 
 public record JsonDataStorage<T>(String path, Class<T> clazz, Gson gson) implements PlayerDataStorage<T> {
@@ -48,7 +46,7 @@ public record JsonDataStorage<T>(String path, Class<T> clazz, Gson gson) impleme
             BaseGson.withRegistries(null);
             return true;
         } catch (Exception e) {
-            PMI.LOGGER.error(String.format("Couldn't save player data of %s for path %s", player, this.path));
+            PMI.LOGGER.error("Couldn't save player data of {} for path {}", player, this.path);
             e.printStackTrace();
             return false;
         }
@@ -68,7 +66,7 @@ public record JsonDataStorage<T>(String path, Class<T> clazz, Gson gson) impleme
             BaseGson.withRegistries(null);
             return ret;
         } catch (Exception e) {
-            PMI.LOGGER.error(String.format("Couldn't load player data of %s for path %s", player, this.path));
+            PMI.LOGGER.error("Couldn't load player data of {} for path {}", player, this.path);
             e.printStackTrace();
             return null;
         }

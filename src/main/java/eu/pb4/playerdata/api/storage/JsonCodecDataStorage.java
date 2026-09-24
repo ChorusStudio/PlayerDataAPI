@@ -35,7 +35,7 @@ public record JsonCodecDataStorage<T>(String path, Codec<T> codec) implements Pl
             Files.writeString(path.resolve(this.path + ".json"), value.toString(), StandardCharsets.UTF_8);
             return true;
         } catch (Exception e) {
-            PMI.LOGGER.error(String.format("Couldn't save player data of %s for path %s", player, this.path));
+            PMI.LOGGER.error("Couldn't save player data of {} for path {}", player, this.path);
             e.printStackTrace();
             return false;
         }
@@ -52,7 +52,7 @@ public record JsonCodecDataStorage<T>(String path, Codec<T> codec) implements Pl
 
             return this.codec.decode(server.registryAccess().createSerializationContext(JsonOps.INSTANCE), element).result().map(Pair::getFirst).orElse(null);
         } catch (Exception e) {
-            PMI.LOGGER.error(String.format("Couldn't load player data of %s for path %s", player, this.path));
+            PMI.LOGGER.error("Couldn't load player data of {} for path {}", player, this.path);
             e.printStackTrace();
             return null;
         }

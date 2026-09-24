@@ -40,7 +40,7 @@ public record NbtCodecDataStorage<T>(String path, Codec<T> codec) implements Pla
             NbtIo.writeCompressed(out, path.resolve(this.path + ".dat"));
             return true;
         } catch (Exception e) {
-            PMI.LOGGER.error(String.format("Couldn't save player data of %s for path %s", player, this.path));
+            PMI.LOGGER.error("Couldn't save player data of {} for path {}", player, this.path);
             e.printStackTrace();
             return false;
         }
@@ -63,7 +63,7 @@ public record NbtCodecDataStorage<T>(String path, Codec<T> codec) implements Pla
 
             return this.codec.decode(server.registryAccess().createSerializationContext(NbtOps.INSTANCE), element).result().map(Pair::getFirst).orElse(null);
         } catch (Exception e) {
-            PMI.LOGGER.error(String.format("Couldn't load player data of %s for path %s", player, this.path));
+            PMI.LOGGER.error("Couldn't load player data of {} for path {}", player, this.path);
             e.printStackTrace();
             return null;
         }
